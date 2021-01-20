@@ -10,6 +10,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using NUnit.Framework;
 
 namespace SpecflowSeleniumUnit.StepDefinitions
 {
@@ -129,6 +130,73 @@ namespace SpecflowSeleniumUnit.StepDefinitions
         {
             var selectElement = GetElement(element);
             return new SelectElement(selectElement);
+        }
+
+        public void WaitTextInElement(string element, string value)
+        {
+            try
+            {
+                IWebElement SeleniumElement =this.GetElement(element);
+                value = ReplaceWithContextValues(value);
+
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SeleniumElement));
+                Assert.AreEqual(value.ToLower(), (SeleniumElement.Text).ToLower());
+            }
+            catch (NoSuchElementException e)
+            {
+                Console.WriteLine(e + "No se encontro el objeto al cual se hace referencia.");
+                throw;
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine(e + "Se cumplió el TimeOut");
+                throw;
+            }
+        }
+        public bool IsElementVisible(IWebElement element)
+        {
+            return element.Displayed && element.Enabled;
+        }
+
+        public bool CheckElementIsVisible(string element)
+        {
+            bool iselementpresent;
+            IWebElement SeleniumElement = this.GetElement(element);
+            try
+            {
+                iselementpresent = IsElementVisible(SeleniumElement);
+
+            }
+            catch (Exception ex)
+            {
+                if (ex is TimeoutException || ex is NoSuchElementException || ex is WebDriverException)
+                {
+                    Console.WriteLine(ex + $"CheckElementIsVisible: object was not found {element}");
+                }
+                iselementpresent = false;
+            }
+            return iselementpresent;
+        }
+
+        protected void AddKeyValuePairToScenarioContext(string key, string value)
+        {
+            if (ScenarioContext.Current.ContainsKey(key) == false)
+            {
+                ScenarioContext.Current.Add(key, value);
+                Console.WriteLine("New key was add to scenario context: " + key + " with the value: " + value);
+            }
+
+        }
+
+        public void AddKeyValuePairToFeatureContext(string key, string value)
+        {
+            if (FeatureContext.Current.ContainsKey(key) == false)
+            {
+                FeatureContext.Current.Add(key, value);
+                Console.WriteLine("New key was add to feature context: " + key + " with the value: " + value);
+            }
+
         }
 
         public string ReplaceWithContextValues(string text)
