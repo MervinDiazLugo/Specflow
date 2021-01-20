@@ -217,6 +217,26 @@ namespace SpecflowSeleniumUnit.StepDefinitions
             }
             return text;
         }
+        
+        public void SwitchToWindowsName(string ventana)
+        {
+            if (ScenarioContext.Current.ContainsKey(ventana) == true)
+            {
+                Driver.SwitchTo().Window((ScenarioContext.Current[ventana]).ToString());
+                Console.WriteLine("volviendo a " + ventana + " : " + ScenarioContext.Current[ventana]);
+            }
+            else
+            {
+                //nWindows = nWindows + 1;
+                nWindows = (Driver.WindowHandles).Count - 1;
+                ScenarioContext.Current.Add(ventana, Driver.WindowHandles[nWindows]);
+                Console.WriteLine(nWindows);
+                Driver.SwitchTo().Window((ScenarioContext.Current[ventana]).ToString());
+                Driver.Manage().Window.Maximize();
+                Console.WriteLine("Estas en " + ventana + " : " + ScenarioContext.Current[ventana]);
+            }
+        }
+
 
     }
 
