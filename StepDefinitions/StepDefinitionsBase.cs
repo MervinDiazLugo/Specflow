@@ -25,7 +25,7 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 
         public string ValueToFind { get; set; }
 
-        public static IWebDriver Driver => Hooks.Hooks.driver;
+        public static IWebDriver Driver => Hooks.Hooks.Driver;
 
 
         public StepDefinitionsBase()

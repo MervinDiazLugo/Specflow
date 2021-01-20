@@ -23,7 +23,7 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 
 		}
 
-		public static IWebDriver Driver => Hooks.Hooks.driver;
+		public static IWebDriver Driver => Hooks.Hooks.Driver;
 
 
 		public static string Environment

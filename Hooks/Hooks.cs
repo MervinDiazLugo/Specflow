@@ -11,7 +11,7 @@ namespace SpecflowSeleniumUnit.Hooks
 	[Binding]
 	public sealed class Hooks
 	{
-		public static IWebDriver driver { get; set; }
+		public static IWebDriver Driver { get; set; }
 
 		[BeforeScenario]
 		public void BeforeScenario()
@@ -19,7 +19,7 @@ namespace SpecflowSeleniumUnit.Hooks
 			Console.WriteLine("***********************************************************************************************************");
 			Console.WriteLine("[ Configuration ] - Initializing driver configuration");
 			Console.WriteLine("***********************************************************************************************************");
-			driver = CreateDriver.initConfig();
+			Driver = CreateDriver.initConfig();
 		}
 
 		[AfterScenario]
@@ -28,7 +28,7 @@ namespace SpecflowSeleniumUnit.Hooks
 			Console.WriteLine("***********************************************************************************************************");
 			Console.WriteLine("[ Driver Status ] - Clean and close the intance of the driver");
 			Console.WriteLine("***********************************************************************************************************");
-			driver.Close();
+			Driver.Close();
 		}
 	}
 }
