@@ -14,14 +14,7 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 	public sealed class StepDefinitions : StepDefinitionsBase
 	{
 
-		private readonly ScenarioContext _scenarioContext;
 		StepDefinitionsBase stepDefinitionsBase = new StepDefinitionsBase();
-
-		public StepDefinitions(ScenarioContext scenarioContext)
-		{
-			_scenarioContext = scenarioContext;
-
-		}
 
 		public static IWebDriver Driver => Hooks.Hooks.Driver;
 
@@ -108,6 +101,7 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 		public void ThenISetWith(string element, string text)
 		{
 			var TestElement = GetElement(element);
+			text = ReplaceWithContextValues(text);
 			TestElement.SendKeys(text);
 		}
 
@@ -127,6 +121,7 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 			TestElement.SelectByText(text);
 		}
 
+		[Given(@"I pause '(.*)' seconds")]
 		[When(@"I pause '(.*)' seconds")]
 		public void WhenIPauseSeconds(int pause)
 		{
@@ -140,6 +135,14 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 		public void GivenICheckElementContains(string element, string value)
 		{
 			TextInElement(element, value);
+		}
+
+		[Then(@"I save text of label '(.*)' in scenario context")]
+		[Given(@"I save text of label '(.*)' in scenario context")]
+		public void ThenISaveTextOfLabelInContext(string element)
+		{
+			var TestElement = GetElement(element);
+			AddKeyValuePairToScenarioContext(element, TestElement.Text);
 		}
 
 

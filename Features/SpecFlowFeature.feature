@@ -1,4 +1,4 @@
-﻿Feature: SpecFlowFeature1
+﻿Feature: SpecFlow Features Examples
 	In order to avoid silly mistakes
 	As a math idiot
 	I want to be told the sum of two numbers
@@ -35,11 +35,16 @@ Scenario: Label text value
 	And I put 'spotify.json' as DOM
 	And I set 'Email' with 'mervindiazlugo@gmail.com'
 	And I click on 'Email Confirmacion' element
+	Given I pause '3' seconds
 	Then I check element 'Email Error' contains 'Este correo electrónico ya está conectado a una cuenta. Inicia sesión.'
+	Then I save text of label 'Email Error' in scenario context
+	And I set 'Email Confirmacion' with '{scenario:Email Error}'
+	Given I pause '5' seconds
+
 
 	
 
-	@Home
+@Home
 Scenario: Create New user in User Management Board
 	#Given I am in the Homepage RHPRO
 	#And Wait for DOM Complete

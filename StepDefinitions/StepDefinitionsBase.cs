@@ -32,6 +32,11 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 
         public int timeOut = 15;
 
+        public static ScenarioContext _scenarioContext => Hooks.Hooks._scenarioContext;
+        public static FeatureContext _featureContext => Hooks.Hooks._featureContext;
+
+        public Regex re { get; set; }
+
         public StepDefinitionsBase()
         {
 
@@ -191,60 +196,66 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 
         protected void AddKeyValuePairToScenarioContext(string key, string value)
         {
-            if (ScenarioContext.Current.ContainsKey(key) == false)
+            if (_scenarioContext.ContainsKey(key) == false)
             {
-                ScenarioContext.Current.Add(key, value);
+                _scenarioContext.Add(key, value);
                 Console.WriteLine("New key was add to scenario context: " + key + " with the value: " + value);
+            }
+            else {
+                _scenarioContext[key] = value;
+                Console.WriteLine("New key was replaced to scenario context: " + key + " with the value: " + value);
             }
 
         }
 
         public void AddKeyValuePairToFeatureContext(string key, string value)
         {
-            if (FeatureContext.Current.ContainsKey(key) == false)
+            if (_featureContext.ContainsKey(key) == false)
             {
-                FeatureContext.Current.Add(key, value);
+                _featureContext.Add(key, value);
                 Console.WriteLine("New key was add to feature context: " + key + " with the value: " + value);
             }
+            else
+            {
+                _featureContext[key] = value;
+                Console.WriteLine("New key was replaced to scenario context: " + key + " with the value: " + value);
+            }
+
 
         }
 
         public string ReplaceWithContextValues(string text)
         {
-            var scenarioMatches = Regex.Matches(text, @"(?<=\{scenario\:)\w+(?=\})").OfType<Match>().Select(m => m.ToString()).Distinct().ToList();
-            var featureMatches = Regex.Matches(text, @"(?<=\{feature\:)\w+(?=\})").OfType<Match>().Select(m => m.ToString()).Distinct().ToList();
+            
+            re = new Regex(@"{scenario:(.*?)}", RegexOptions.Compiled);
+            var scenarioMatches = re.Matches(text);
 
-            foreach (var match in scenarioMatches)
-            {
-                if (ScenarioContext.Current.Keys.Contains(match.ToString()))
-                    text = Regex.Replace(text, @"(\{scenario\:)" + match + @"(\})", ScenarioContext.Current[match.ToString()].ToString());
+            foreach (Match match in scenarioMatches)
+            { 
+                text = Regex.Replace(text, match.Value, _scenarioContext[match.Groups[1].Value.ToString()].ToString());
             }
 
-            foreach (var match in featureMatches)
-            {
-                if (FeatureContext.Current.Keys.Contains(match.ToString()))
-                    text = Regex.Replace(text, @"(\{feature\:)" + match + @"(\})", FeatureContext.Current[match.ToString()].ToString());
-            }
             return text;
         }
         
         public void SwitchToWindowsName(string ventana)
         {
-            if (ScenarioContext.Current.ContainsKey(ventana) == true)
+            if (_scenarioContext.ContainsKey(ventana) == true)
             {
-                Driver.SwitchTo().Window((ScenarioContext.Current[ventana]).ToString());
-                Console.WriteLine("volviendo a " + ventana + " : " + ScenarioContext.Current[ventana]);
+                Driver.SwitchTo().Window((_scenarioContext[ventana]).ToString());
+                Console.WriteLine("volviendo a " + ventana + " : " + _scenarioContext[ventana]);
             }
             else
             {
                 nWindows = (Driver.WindowHandles).Count - 1;
-                ScenarioContext.Current.Add(ventana, Driver.WindowHandles[nWindows]);
+                _scenarioContext.Add(ventana, Driver.WindowHandles[nWindows]);
                 Console.WriteLine(nWindows);
-                Driver.SwitchTo().Window((ScenarioContext.Current[ventana]).ToString());
+                Driver.SwitchTo().Window((_scenarioContext[ventana]).ToString());
                 Driver.Manage().Window.Maximize();
-                Console.WriteLine("Estas en " + ventana + " : " + ScenarioContext.Current[ventana]);
+                Console.WriteLine("Estas en " + ventana + " : " + _scenarioContext[ventana]);
             }
         }
+
 
 
     }

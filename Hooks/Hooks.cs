@@ -12,13 +12,24 @@ namespace SpecflowSeleniumUnit.Hooks
 	public sealed class Hooks
 	{
 		public static IWebDriver Driver { get; set; }
+		public static ScenarioContext _scenarioContext { get; set; }
+		public static FeatureContext _featureContext { get; set; }
+
+		public Hooks(ScenarioContext scenarioContext, FeatureContext featureContext)
+		{
+			_scenarioContext = scenarioContext;
+			_featureContext = featureContext;
+		}
 
 		[BeforeScenario]
 		public void BeforeScenario()
 		{
 			Console.WriteLine("***********************************************************************************************************");
 			Console.WriteLine("[ Configuration ] - Initializing driver configuration");
+			Console.WriteLine($"Feature Name : {_featureContext.FeatureInfo.Title}");
+			Console.WriteLine($"Scenario Name : {_scenarioContext.ScenarioInfo.Title}");
 			Console.WriteLine("***********************************************************************************************************");
+			
 			Driver = CreateDriver.initConfig();
 		}
 
