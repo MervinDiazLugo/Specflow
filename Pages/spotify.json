@@ -42,7 +42,7 @@
 
     "Email Error": {
         "GetFieldBy": "xpath",
-        "ValueToFind": "//*[contains(@class,'LinkContainer-sc-1t58wcv-0') and contains (.,'Este correo')]"
+        "ValueToFind": "//*[contains(@class,'LinkContainer') and contains (.,'Este correo')]"
     },
 
     "text": {

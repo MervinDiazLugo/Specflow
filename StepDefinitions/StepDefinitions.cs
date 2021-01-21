@@ -127,12 +127,21 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 			TestElement.SelectByText(text);
 		}
 
-		[When(@"I Pause '(.*)' seconds")]
+		[When(@"I pause '(.*)' seconds")]
 		public void WhenIPauseSeconds(int pause)
 		{
 			pause = pause * 1000;
 			Thread.Sleep(pause);
 		}
+
+
+		[Then(@"I check element '(.*)' contains '(.*)'")]
+		[Given(@"I check element '(.*)' contains '(.*)'")]
+		public void GivenICheckElementContains(string element, string value)
+		{
+			TextInElement(element, value);
+		}
+
 
 
 	}

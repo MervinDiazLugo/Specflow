@@ -28,6 +28,9 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 
         public static IWebDriver Driver => Hooks.Hooks.Driver;
 
+        public int nWindows { get; set; }
+
+        public int timeOut = 15;
 
         public StepDefinitionsBase()
         {
@@ -92,23 +95,29 @@ namespace SpecflowSeleniumUnit.StepDefinitions
                 GetFieldBy = EntityString["GetFieldBy"];
                 ValueToFind = EntityString["ValueToFind"];
             }
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut));
             try
             {
                 switch (GetFieldBy.ToLowerInvariant())
                 {
                     case "id":
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id(ValueToFind)));
                         SeleniumElement = Driver.FindElement(By.Id(ValueToFind));
                         return SeleniumElement;
                     case "xpath":
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath(ValueToFind)));
                         SeleniumElement = Driver.FindElement(By.XPath(ValueToFind));
                         return SeleniumElement;
                     case "name":
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Name(ValueToFind)));
                         SeleniumElement = Driver.FindElement(By.Name(ValueToFind));
                         return SeleniumElement;
                     case "linktext":
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.PartialLinkText(ValueToFind)));
                         SeleniumElement = Driver.FindElement(By.PartialLinkText(ValueToFind));
                         return SeleniumElement;
                     case "cssselector":
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(ValueToFind)));
                         SeleniumElement = Driver.FindElement(By.CssSelector(ValueToFind));
                         return SeleniumElement;
                     default:
@@ -132,25 +141,26 @@ namespace SpecflowSeleniumUnit.StepDefinitions
             return new SelectElement(selectElement);
         }
 
-        public void WaitTextInElement(string element, string value)
+        public void TextInElement(string element, string value)
         {
             try
             {
-                IWebElement SeleniumElement =this.GetElement(element);
+                var SeleniumElement = this.GetElement(element);
                 value = ReplaceWithContextValues(value);
-
-                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+                WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut));
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SeleniumElement));
-                Assert.AreEqual(value.ToLower(), (SeleniumElement.Text).ToLower());
+                IsElementVisible(SeleniumElement);
+                Console.WriteLine($"Value of element: {SeleniumElement.Text}");
+                Assert.AreEqual(value.ToLower(), SeleniumElement.Text.ToLower());
             }
             catch (NoSuchElementException e)
             {
-                Console.WriteLine(e + "No se encontro el objeto al cual se hace referencia.");
+                Console.WriteLine(e + $"{element} is not found");
                 throw;
             }
             catch (TimeoutException e)
             {
-                Console.WriteLine(e + "Se cumplió el TimeOut");
+                Console.WriteLine(e + $"{element} is TimeOut");
                 throw;
             }
         }
@@ -227,7 +237,6 @@ namespace SpecflowSeleniumUnit.StepDefinitions
             }
             else
             {
-                //nWindows = nWindows + 1;
                 nWindows = (Driver.WindowHandles).Count - 1;
                 ScenarioContext.Current.Add(ventana, Driver.WindowHandles[nWindows]);
                 Console.WriteLine(nWindows);

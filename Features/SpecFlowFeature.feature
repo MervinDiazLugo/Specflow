@@ -14,17 +14,36 @@ Scenario: Add two numbers
 Scenario: Inicializar Navegador
 	Given I am in main app
 	And I put 'spotify.json' as DOM
-	And I set 'Email' with 'mervindiazlugo@gmail.com'
+	
+@example
+Scenario: Manejar dropdowns
+	Given I am in main app
+	And I put 'spotify.json' as DOM
 	And I select 'Mes de Nacimiento' dropdown by text 'Enero'
-	When I Pause '5' seconds
 	Then I select 'Mes de Nacimiento' dropdown by text 'Marzo'
 
+@example
+Scenario: Manejar textbox
+	Given I am in main app
+	And I put 'spotify.json' as DOM
+	And I set 'Email' with 'mervindiazlugo@gmail.com'
+
+
+@example
+Scenario: Label text value
+	Given I am in main app
+	And I put 'spotify.json' as DOM
+	And I set 'Email' with 'mervindiazlugo@gmail.com'
+	And I click on 'Email Confirmacion' element
+	Then I check element 'Email Error' contains 'Este correo electrónico ya está conectado a una cuenta. Inicia sesión.'
+
+	
 
 	@Home
 Scenario: Create New user in User Management Board
-	Given I am in the Homepage RHPRO
-	And Wait for DOM Complete
-	And I am logged in
+	#Given I am in the Homepage RHPRO
+	#And Wait for DOM Complete
+	#And I am logged in
 	#And I set Language with 'Español - Argentina'
 	And Wait for DOM Complete
 	When I go to Users Management
