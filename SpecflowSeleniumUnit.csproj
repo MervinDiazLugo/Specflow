@@ -115,6 +115,9 @@
     <None Include="app.config" />
     <None Include="Features\SpecFlowFeature.feature" />
     <None Include="packages.config" />
+    <None Include="Pages\frames.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Pages\spotify.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

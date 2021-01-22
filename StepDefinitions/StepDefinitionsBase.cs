@@ -16,7 +16,6 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 {
     public class StepDefinitionsBase
     {
-        public static IWebDriver driver { get; set; }
 
         public string jsonString { get; set; }
 
@@ -88,7 +87,6 @@ namespace SpecflowSeleniumUnit.StepDefinitions
             
             
         }
-
 
         public IWebElement GetElement(String element)
         {
@@ -255,6 +253,28 @@ namespace SpecflowSeleniumUnit.StepDefinitions
                 Console.WriteLine("Estas en " + ventana + " : " + _scenarioContext[ventana]);
             }
         }
+        public void SwitchToFrame(string Iframe) {
+
+            var SeleniumElement = GetElement(Iframe);
+            Driver.SwitchTo().Frame(SeleniumElement);
+        }
+
+        public void IsAlertPresent()
+        {
+            try
+            {
+                WebDriverWait Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+                Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
+                string alertText = Driver.SwitchTo().Alert().Text;
+                Driver.SwitchTo().Alert().Accept();
+                Console.WriteLine(alertText);
+            }
+            catch (NoAlertPresentException e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
 
 
 

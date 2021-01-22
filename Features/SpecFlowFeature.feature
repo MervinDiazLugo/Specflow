@@ -39,36 +39,23 @@ Scenario: Label text value
 	Then I check element 'Email Error' contains 'Este correo electrónico ya está conectado a una cuenta. Inicia sesión.'
 	Then I save text of label 'Email Error' in scenario context
 	And I set 'Email Confirmacion' with '{scenario:Email Error}'
+	Then I check element 'Email Error' contains '{scenario:Email Error}'
 	Given I pause '5' seconds
 
 
 	
-
-@Home
-Scenario: Create New user in User Management Board
-	#Given I am in the Homepage RHPRO
-	#And Wait for DOM Complete
-	#And I am logged in
-	#And I set Language with 'Español - Argentina'
-	And Wait for DOM Complete
-	When I go to Users Management
-	And I maximize window
-	And I click on 'Agregar_Usuario' button
-	And I set 'inputusername' with 'randomText' and save in context
-	And I set 'inputname' with 'randomText' and save in context
-	And I set 'inputemail' with 'randomEmail' and save in context
-	And I set 'inputPassword' with 'suipacha' and save in context
-	And I set 'inputPassword2' with 'suipacha' and save in context
-	And I set 'list_UserTenants' dropdown to 'AUTOFMK_TEST'
-	And I set 'list_RolesTenants' dropdown to 'WebAPI'
-	And I set 'list_PoliciesTenants' dropdown to 'Relajada'
-	And I click on 'Agregar' button
-	And I click on 'Aceptar' button
-	And I Wait for element 'Message_Box' is enable
-	And I check that 'Message_Box' contains 'Usuario Creado'
-	And I click on 'Aceptar' button
-	And I Wait for element 'txtSearch' is enable
-	And I set 'txtSearch' with '{scenario:inputusername}' and save in context
-	And I click on 'btnLoad' button
-	And I check that 'SelectionListUserName' contains '{scenario:inputusername}'
-	And I close all windows
+@example
+Scenario: Open New Tab
+    Given Navigates to 'https://www.amazon.es/'
+    And I open new tab with URL 'https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert'
+    Then I go to 'Second' window
+    Then I go to 'Principal' window
+    And I open new tab with URL 'https://www.w3schools.com/'
+    Then I go to 'Second' window
+    And I put 'frames.json' as DOM
+    And I Switch to 'Frame5 Alerta' Iframe
+    Given I pause '5' seconds
+    And I click on 'Alert' element
+    Given I pause '5' seconds
+    And I close Alert dialog
+    Given I pause '5' seconds
