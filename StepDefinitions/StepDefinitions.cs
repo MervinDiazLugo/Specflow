@@ -16,12 +16,10 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 
 		StepDefinitionsBase stepDefinitionsBase = new StepDefinitionsBase();
 
-        public static IWebDriver GetDriver()
-        {
-            return Hooks.Hooks.Driver;
-        }
+		public static IWebDriver Driver => Hooks.Hooks.Driver;
 
-        public static string Environment
+
+		public static string Environment
 		{
 			get
 			{
@@ -81,35 +79,10 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 		public void GivenIAmInMainApp()
 		{
 			Console.WriteLine($"{BaseUrl}");
-            GetDriver().Url = $"{BaseUrl}";
-            GetDriver().Manage().Window.Maximize();
-			WaitForDOMComplete();
+			Driver.Url = $"{BaseUrl}";
+			Driver.Manage().Window.Maximize();
+			StepDefinitionsBase.WaitForDOMComplete();
 		}
-
-		[Given(@"Navigates to '(.*)'")]
-		public void GivenNavigatesTo(string url)
-		{
-            GetDriver().Url = $"{url}";
-            GetDriver().Manage().Window.Maximize();
-			WaitForDOMComplete();
-			SwitchToWindowsName("Principal");
-		}
-
-		[Given(@"I open new tab with URL '(.*)'")]
-		[Then(@"I open new tab with URL '(.*)'")]
-		public void GivenIOpenNewTabWithURL(string url)
-		{
-			IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
-			js.ExecuteScript("window.open(arguments[0], '_blank')", url);
-			WaitForDOMComplete();
-		}
-
-		[Then(@"I go to '(.*)' window")]
-		public void ThenIGoToWindow(string window)
-		{
-			SwitchToWindowsName(window);
-		}
-
 
 		[Given(@"Wait for DOM Complete")]
 		public void WhenWaitForDOMComplete()
@@ -118,7 +91,6 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 		}
 
 		[Given(@"I put '(.*)' as DOM")]
-		[Then(@"I put '(.*)' as DOM")]
 		public void ThenIPutAsDOM(string jsonFile)
 		{
 			ReadJsonContentFromFile(jsonFile);
@@ -172,20 +144,6 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 			var TestElement = GetElement(element);
 			AddKeyValuePairToScenarioContext(element, TestElement.Text);
 		}
-
-		[Then(@"I Switch to '(.*)' Iframe")]
-		public void ThenISwitchToIframe(string Iframe)
-		{
-			SwitchToFrame(Iframe);
-		}
-
-		[Given(@"I close Alert dialog")]
-		public void GivenICloseAlertDialog()
-		{
-			IsAlertPresent();
-		}
-
-
 
 
 

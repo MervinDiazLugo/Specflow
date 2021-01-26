@@ -180,50 +180,65 @@ this.ScenarioInitialize(scenarioInfo);
 #line 41
  testRunner.And("I set \'Email Confirmacion\' with \'{scenario:Email Error}\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 42
- testRunner.Then("I check element \'Email Error\' contains \'{scenario:Email Error}\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 43
  testRunner.Given("I pause \'5\' seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Open New Tab")]
-        [NUnit.Framework.CategoryAttribute("example")]
-        public virtual void OpenNewTab()
+        [NUnit.Framework.DescriptionAttribute("Create New user in User Management Board")]
+        [NUnit.Framework.CategoryAttribute("Home")]
+        public virtual void CreateNewUserInUserManagementBoard()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open New Tab", null, new string[] {
-                        "example"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create New user in User Management Board", null, new string[] {
+                        "Home"});
 #line 48
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 49
-    testRunner.Given("Navigates to \'https://www.amazon.es/\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 50
-    testRunner.And("I open new tab with URL \'https://www.w3schools.com/jsref/tryit.asp?filename=tryjs" +
-                    "ref_alert\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
-    testRunner.Then("I go to \'Second\' window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 52
-    testRunner.Then("I go to \'Principal\' window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 53
-    testRunner.And("I open new tab with URL \'https://www.w3schools.com/\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Wait for DOM Complete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 54
-    testRunner.Then("I go to \'Second\' window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I go to Users Management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 55
-    testRunner.And("I put \'frames.json\' as DOM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I maximize window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 56
-    testRunner.And("I Switch to \'Frame5 Alerta\' Iframe", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click on \'Agregar_Usuario\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 57
-    testRunner.Given("I pause \'5\' seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.And("I set \'inputusername\' with \'randomText\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 58
-    testRunner.And("I click on \'Alert\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I set \'inputname\' with \'randomText\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 59
-    testRunner.Given("I pause \'5\' seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.And("I set \'inputemail\' with \'randomEmail\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 60
-    testRunner.And("I close Alert dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I set \'inputPassword\' with \'suipacha\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
-    testRunner.Given("I pause \'5\' seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.And("I set \'inputPassword2\' with \'suipacha\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 62
+ testRunner.And("I set \'list_UserTenants\' dropdown to \'AUTOFMK_TEST\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 63
+ testRunner.And("I set \'list_RolesTenants\' dropdown to \'WebAPI\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
+ testRunner.And("I set \'list_PoliciesTenants\' dropdown to \'Relajada\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 65
+ testRunner.And("I click on \'Agregar\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 66
+ testRunner.And("I click on \'Aceptar\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 67
+ testRunner.And("I Wait for element \'Message_Box\' is enable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+ testRunner.And("I check that \'Message_Box\' contains \'Usuario Creado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 69
+ testRunner.And("I click on \'Aceptar\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 70
+ testRunner.And("I Wait for element \'txtSearch\' is enable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 71
+ testRunner.And("I set \'txtSearch\' with \'{scenario:inputusername}\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 72
+ testRunner.And("I click on \'btnLoad\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 73
+ testRunner.And("I check that \'SelectionListUserName\' contains \'{scenario:inputusername}\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 74
+ testRunner.And("I close all windows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
