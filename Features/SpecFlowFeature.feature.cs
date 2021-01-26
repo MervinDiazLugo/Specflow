@@ -307,15 +307,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create New user in User Management Board")]
-        [NUnit.Framework.CategoryAttribute("Home")]
-        public virtual void CreateNewUserInUserManagementBoard()
+        [NUnit.Framework.DescriptionAttribute("Open New Tab")]
+        [NUnit.Framework.CategoryAttribute("example")]
+        public virtual void OpenNewTab()
         {
             string[] tagsOfScenario = new string[] {
-                    "Home"};
+                    "example"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create New user in User Management Board", null, tagsOfScenario, argumentsOfScenario);
-#line 48
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open New Tab", null, tagsOfScenario, argumentsOfScenario);
+#line 47
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -335,71 +335,39 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 48
+    testRunner.Given("Navigates to \'https://www.amazon.es/\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 49
+    testRunner.And("I open new tab with URL \'https://www.w3schools.com/jsref/tryit.asp?filename=tryjs" +
+                        "ref_alert\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 50
+    testRunner.Then("I go to \'Second\' window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 51
+    testRunner.Then("I go to \'Principal\' window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 52
+    testRunner.And("I open new tab with URL \'https://www.w3schools.com/\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
 #line 53
- testRunner.And("Wait for DOM Complete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.Then("I go to \'Second\' window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 54
- testRunner.When("I go to Users Management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.And("I put \'frames.json\' as DOM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 55
- testRunner.And("I maximize window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I Switch to \'Frame5 Alerta\' Iframe", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 56
- testRunner.And("I click on \'Agregar_Usuario\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I click on \'Alert\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 57
- testRunner.And("I set \'inputusername\' with \'randomText\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I close Alert dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 58
- testRunner.And("I set \'inputname\' with \'randomText\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 59
- testRunner.And("I set \'inputemail\' with \'randomEmail\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 60
- testRunner.And("I set \'inputPassword\' with \'suipacha\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 61
- testRunner.And("I set \'inputPassword2\' with \'suipacha\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 62
- testRunner.And("I set \'list_UserTenants\' dropdown to \'AUTOFMK_TEST\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 63
- testRunner.And("I set \'list_RolesTenants\' dropdown to \'WebAPI\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 64
- testRunner.And("I set \'list_PoliciesTenants\' dropdown to \'Relajada\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 65
- testRunner.And("I click on \'Agregar\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 66
- testRunner.And("I click on \'Aceptar\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 67
- testRunner.And("I Wait for element \'Message_Box\' is enable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 68
- testRunner.And("I check that \'Message_Box\' contains \'Usuario Creado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 69
- testRunner.And("I click on \'Aceptar\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 70
- testRunner.And("I Wait for element \'txtSearch\' is enable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 71
- testRunner.And("I set \'txtSearch\' with \'{scenario:inputusername}\' and save in context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 72
- testRunner.And("I click on \'btnLoad\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 73
- testRunner.And("I check that \'SelectionListUserName\' contains \'{scenario:inputusername}\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 74
- testRunner.And("I close all windows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.Given("I pause \'5\' seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             }
             this.ScenarioCleanup();

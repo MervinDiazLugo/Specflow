@@ -107,22 +107,31 @@ namespace SpecflowSeleniumUnit.StepDefinitions
                 {
                     case "id":
                         wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id(ValueToFind)));
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id(ValueToFind)));
                         SeleniumElement = Driver.FindElement(By.Id(ValueToFind));
                         return SeleniumElement;
                     case "xpath":
                         wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath(ValueToFind)));
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(ValueToFind)));
+
                         SeleniumElement = Driver.FindElement(By.XPath(ValueToFind));
                         return SeleniumElement;
                     case "name":
                         wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Name(ValueToFind)));
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Name(ValueToFind)));
+
                         SeleniumElement = Driver.FindElement(By.Name(ValueToFind));
                         return SeleniumElement;
                     case "linktext":
                         wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.PartialLinkText(ValueToFind)));
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.PartialLinkText(ValueToFind)));
+
                         SeleniumElement = Driver.FindElement(By.PartialLinkText(ValueToFind));
                         return SeleniumElement;
                     case "cssselector":
                         wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(ValueToFind)));
+                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector(ValueToFind)));
+
                         SeleniumElement = Driver.FindElement(By.CssSelector(ValueToFind));
                         return SeleniumElement;
                     default:
@@ -253,6 +262,28 @@ namespace SpecflowSeleniumUnit.StepDefinitions
                 Driver.SwitchTo().Window((_scenarioContext[ventana]).ToString());
                 Driver.Manage().Window.Maximize();
                 Console.WriteLine("Estas en " + ventana + " : " + _scenarioContext[ventana]);
+            }
+        }
+        public void SwitchToFrame(string Iframe)
+        {
+
+            var SeleniumElement = GetElement(Iframe);
+            Driver.SwitchTo().Frame(SeleniumElement);
+        }
+
+        public void IsAlertPresent()
+        {
+            try
+            {
+                WebDriverWait Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(30));
+                Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
+                string alertText = Driver.SwitchTo().Alert().Text;
+                Driver.SwitchTo().Alert().Accept();
+                Console.WriteLine($"Alert Present, text is : {alertText}");
+            }
+            catch (NoAlertPresentException e)
+            {
+                Console.WriteLine(e);
             }
         }
 

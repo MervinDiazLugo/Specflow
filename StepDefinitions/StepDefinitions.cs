@@ -16,7 +16,10 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 
 		StepDefinitionsBase stepDefinitionsBase = new StepDefinitionsBase();
 
-		public static IWebDriver Driver => Hooks.Hooks.Driver;
+		public static IWebDriver GetDriver()
+		{
+			return Hooks.Hooks.Driver;
+		}
 
 
 		public static string Environment
@@ -84,12 +87,37 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 			StepDefinitionsBase.WaitForDOMComplete();
 		}
 
+		[Given(@"Navigates to '(.*)'")]
+		public void GivenNavigatesTo(string url)
+		{
+			GetDriver().Url = $"{url}";
+			GetDriver().Manage().Window.Maximize();
+			WaitForDOMComplete();
+			SwitchToWindowsName("Principal");
+		}
+
+		[Given(@"I open new tab with URL '(.*)'")]
+		[Then(@"I open new tab with URL '(.*)'")]
+		public void GivenIOpenNewTabWithURL(string url)
+		{
+			IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+			js.ExecuteScript("window.open(arguments[0], '_blank')", url);
+			WaitForDOMComplete();
+		}
+
+		[Then(@"I go to '(.*)' window")]
+		public void ThenIGoToWindow(string window)
+		{
+			SwitchToWindowsName(window);
+		}
+
 		[Given(@"Wait for DOM Complete")]
 		public void WhenWaitForDOMComplete()
 		{
 			WaitForDOMComplete();
 		}
 
+		[Then(@"I put '(.*)' as DOM")]
 		[Given(@"I put '(.*)' as DOM")]
 		public void ThenIPutAsDOM(string jsonFile)
 		{
@@ -143,6 +171,19 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 		{
 			var TestElement = GetElement(element);
 			AddKeyValuePairToScenarioContext(element, TestElement.Text);
+		}
+
+		[Then(@"I Switch to '(.*)' Iframe")]
+		public void ThenISwitchToIframe(string Iframe)
+		{
+			SwitchToFrame(Iframe);
+		}
+
+		[Then(@"I close Alert dialog")]
+		[Given(@"I close Alert dialog")]
+		public void GivenICloseAlertDialog()
+		{
+			IsAlertPresent();
 		}
 
 
