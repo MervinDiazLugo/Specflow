@@ -39,7 +39,7 @@ namespace SpecflowSeleniumUnit.Hooks
 			Console.WriteLine("***********************************************************************************************************");
 			Console.WriteLine("[ Driver Status ] - Clean and close the intance of the driver");
 			Console.WriteLine("***********************************************************************************************************");
-			Driver.Close();
+			Driver.Quit();
 		}
 	}
 }
