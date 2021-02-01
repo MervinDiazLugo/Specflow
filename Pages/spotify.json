@@ -52,7 +52,7 @@
 
     "thirdParty": {
         "GetFieldBy": "xpath",
-        "ValueToFind": "//input[@name='thirdParty']"
+        "ValueToFind": "/html[1]/body[1]/div[1]/main[1]/div[2]/form[1]/div[7]/label[1]/span[1]"
     }
 
 
