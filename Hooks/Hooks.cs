@@ -15,11 +15,22 @@ namespace SpecflowSeleniumUnit.Hooks
 		public static ScenarioContext _scenarioContext { get; set; }
 		public static FeatureContext _featureContext { get; set; }
 
+		public static string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+
 		public Hooks(ScenarioContext scenarioContext, FeatureContext featureContext)
 		{
 			_scenarioContext = scenarioContext;
 			_featureContext = featureContext;
 		}
+
+
+		//[BeforeTestRun]
+		//public static string BeforeTestRun()
+		//{
+		//	Environment.CurrentDirectory = $"{basePath}/allure-results"; ;
+		//	return Environment.CurrentDirectory;
+		//}
 
 		[BeforeScenario]
 		public void BeforeScenario()
@@ -28,6 +39,8 @@ namespace SpecflowSeleniumUnit.Hooks
 			Console.WriteLine("[ Configuration ] - Initializing driver configuration");
 			Console.WriteLine($"Feature Name : {_featureContext.FeatureInfo.Title}");
 			Console.WriteLine($"Scenario Name : {_scenarioContext.ScenarioInfo.Title}");
+			Console.WriteLine($"Base Path : {basePath}");
+			Console.WriteLine($"allure base : {Environment.CurrentDirectory}");
 			Console.WriteLine("***********************************************************************************************************");
 			
 			Driver = CreateDriver.initConfig();

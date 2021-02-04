@@ -1,12 +1,13 @@
 {
-    "allure": {
-        "directory": "C:\\visma.specflow.main\\SpecflowSeleniumUnit\\SpecflowSeleniumUnit\\bin\\Debug\\allure-results",
-        "links": [
-            "{link}",
-            "{issue}",
-            "{tms}"
-        ]
-    },
+  "allure": {
+    "title": "My Project Test Results",
+    "directory": "allure-results",
+    "links": [
+      "{link}",
+      "{issue}",
+      "{tms}"
+    ]
+  },
   "specflow": {
     "stepArguments": {
       "convertToParameters": "true",
