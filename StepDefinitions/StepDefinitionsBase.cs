@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
+using System.Configuration;
 
 namespace SpecflowSeleniumUnit.StepDefinitions
 {
@@ -40,6 +41,13 @@ namespace SpecflowSeleniumUnit.StepDefinitions
         public StepDefinitionsBase()
         {
 
+        }
+        public static string Environment
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DefaultEnvironment"];
+            }
         }
 
         public static void WaitForDOMComplete()
@@ -287,9 +295,14 @@ namespace SpecflowSeleniumUnit.StepDefinitions
             }
         }
 
+        public string readProperties(string property)
+        {
+            return ConfigurationManager.AppSettings[$"{Environment}:{property}"];
+        }
 
 
-    }
+
+}
 
 }
 

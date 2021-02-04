@@ -3,6 +3,9 @@
 	As a math idiot
 	I want to be told the sum of two numbers
 
+Background: 
+	Given I set 'UserEmail' value in Data Scenario
+
 @mytag
 Scenario: Add two numbers
 	Given the first number is 50
@@ -56,3 +59,4 @@ Scenario: Open New Tab
     And I click on 'Alert' element
     And I close Alert dialog
     Given I pause '5' seconds
+

@@ -186,6 +186,13 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 			IsAlertPresent();
 		}
 
+		[Given(@"I set '(.*)' value in Data Scenario")]
+		public void GivenISetValueInDataScenario(string value)
+		{
+			AddKeyValuePairToScenarioContext(value, readProperties(value));
+		}
+
+
 
 
 	}
