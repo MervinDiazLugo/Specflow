@@ -186,6 +186,18 @@ namespace SpecflowSeleniumUnit.StepDefinitions
 			IsAlertPresent();
 		}
 
+		[Given(@"I scroll into element '(.*)'")]
+		public void GivenIScrollIntoElement(string element)
+		{
+			ScrolltoElement(element);
+		}
+
+		[Given(@"I set '(.*)' checkbox to select")]
+		public void GivenISetCheckboxToSelect(string element)
+		{
+			SetCheckboxToSelect(element);
+		}
+
 		[Given(@"I set '(.*)' value in Data Scenario")]
 		public void GivenISetValueInDataScenario(string value)
 		{

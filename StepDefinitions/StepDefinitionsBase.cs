@@ -279,11 +279,31 @@ namespace SpecflowSeleniumUnit.StepDefinitions
             Driver.SwitchTo().Frame(SeleniumElement);
         }
 
+        public void ScrolltoElement(string element)
+        {
+            var SeleniumElement = GetElement(element);
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)Driver;
+            executor.ExecuteScript("arguments[0].scrollIntoView(true);", SeleniumElement);
+            Console.WriteLine("Document.scrollIntoView : Complete");
+        }
+
+        public void SetCheckboxToSelect(string element) {
+            var SeleniumElement = GetElement(element);
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SeleniumElement));
+            IsElementVisible(SeleniumElement);
+            if (!SeleniumElement.Selected)
+            {
+                SeleniumElement.Click();
+            }
+
+        }
+
         public void IsAlertPresent()
         {
             try
             {
-                WebDriverWait Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(30));
+                WebDriverWait Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut));
                 Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
                 string alertText = Driver.SwitchTo().Alert().Text;
                 Driver.SwitchTo().Alert().Accept();

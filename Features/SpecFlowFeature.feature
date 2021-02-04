@@ -60,3 +60,10 @@ Scenario: Open New Tab
     And I close Alert dialog
     Given I pause '5' seconds
 
+@example
+Scenario: Click in checkbox
+    Given I am in main app
+	And I put 'spotify.json' as DOM
+    And I scroll into element 'thirdParty'
+    And I set 'thirdParty' checkbox to select
+	Given I pause '5' seconds
